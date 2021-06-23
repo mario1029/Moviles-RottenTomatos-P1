@@ -1,6 +1,7 @@
-export = pool;
-declare class pool {
-    static getInstance(): any;
-    constructor(config: any);
+import { Pool as PgPool } from 'pg';
+export default class Pool {
+    private static instance;
+    private constructor();
+    static getInstance(): PgPool;
 }
 //# sourceMappingURL=pool.d.ts.map

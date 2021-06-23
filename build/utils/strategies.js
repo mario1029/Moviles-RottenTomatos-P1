@@ -1,17 +1,19 @@
 "use strict";
-const { getUserByID, comparePassword } = require('../helpers/session');
-const Strategy = require('passport-local');
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LocalStrategy = void 0;
+const session_1 = require("../helpers/session");
+const passport_local_1 = require("passport-local");
 //Nota: La cedula tambien es el el username
-const LocalStrategy = new Strategy({
+exports.LocalStrategy = new passport_local_1.Strategy({
     usernameField: 'cedula',
     passwordField: 'contra',
 }, async (cedula, contra, done) => {
     try {
-        const user = await getUserByID(cedula);
+        const user = await session_1.getUserByID(cedula);
         if (!user) {
             return done(null, false);
         }
-        const isMatch = await comparePassword(contra, user.contra);
+        const isMatch = await session_1.comparePassword(contra, user.contra);
         delete user.contra;
         return isMatch ? done(null, user) : done(null, false);
     }
@@ -19,5 +21,4 @@ const LocalStrategy = new Strategy({
         return done(null, false);
     }
 });
-module.exports = { LocalStrategy };
 //# sourceMappingURL=strategies.js.map

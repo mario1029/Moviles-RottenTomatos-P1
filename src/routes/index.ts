@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import auth from './session';
+import session from './session';
 import users from './users';
 
 const router = Router();
 
-router.use("/session", auth);
-router.use("/users", users);
+router.use('/session', session);
+router.use('/users', users);
 
-module.exports = router;
+export default router;

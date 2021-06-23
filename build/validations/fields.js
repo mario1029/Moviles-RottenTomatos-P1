@@ -1,24 +1,26 @@
 "use strict";
-const { validationResult, check } = require('express-validator');
-const signUpFieldsValidation = [
-    check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
-    check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
-    check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
-    check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
-    check('contra').exists().withMessage('Debe incluir la contraseña'),
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.checkResult = exports.loginFieldsValidation = exports.updateUserFieldsValidation = exports.signUpFieldsValidation = void 0;
+const express_validator_1 = require("express-validator");
+exports.signUpFieldsValidation = [
+    express_validator_1.check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
+    express_validator_1.check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
+    express_validator_1.check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
+    express_validator_1.check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
+    express_validator_1.check('contra').exists().withMessage('Debe incluir la contraseña'),
 ];
-const updateUserFieldsValidation = [
-    check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
-    check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
-    check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
-    check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
+exports.updateUserFieldsValidation = [
+    express_validator_1.check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
+    express_validator_1.check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
+    express_validator_1.check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
+    express_validator_1.check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
 ];
-const loginFieldsValidation = [
-    check('cedula').exists().withMessage('Debe incluir el nombre de usuario').isString().withMessage('Nombre de usuario invalido'),
-    check('contra').exists().withMessage('Debe incluir la contraseña').isString().withMessage('Contraseña invalida'),
+exports.loginFieldsValidation = [
+    express_validator_1.check('cedula').exists().withMessage('Debe incluir el nombre de usuario').isString().withMessage('Nombre de usuario invalido'),
+    express_validator_1.check('contra').exists().withMessage('Debe incluir la contraseña').isString().withMessage('Contraseña invalida'),
 ];
 const checkResult = (req, res, next) => {
-    const errors = validationResult(req);
+    const errors = express_validator_1.validationResult(req);
     if (!errors.isEmpty()) {
         res.status(400).json({
             status: 400,
@@ -30,5 +32,5 @@ const checkResult = (req, res, next) => {
         next();
     }
 };
-module.exports = { signUpFieldsValidation, updateUserFieldsValidation, loginFieldsValidation, checkResult };
+exports.checkResult = checkResult;
 //# sourceMappingURL=fields.js.map

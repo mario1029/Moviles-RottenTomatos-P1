@@ -1,6 +1,6 @@
-const { validationResult, check } =require('express-validator');
+import { validationResult, check } from 'express-validator';
 
-const signUpFieldsValidation = [
+export const signUpFieldsValidation = [
   check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
   check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
   check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
@@ -8,19 +8,19 @@ const signUpFieldsValidation = [
   check('contra').exists().withMessage('Debe incluir la contraseña'),
 ];
 
-const updateUserFieldsValidation = [
+export const updateUserFieldsValidation = [
   check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
   check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
   check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
   check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
 ];
 
-const loginFieldsValidation = [
+export const loginFieldsValidation = [
   check('cedula').exists().withMessage('Debe incluir el nombre de usuario').isString().withMessage('Nombre de usuario invalido'),
   check('contra').exists().withMessage('Debe incluir la contraseña').isString().withMessage('Contraseña invalida'),
 ];
 
-const checkResult = (req, res, next) => {
+export const checkResult = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400).json({
@@ -29,8 +29,6 @@ const checkResult = (req, res, next) => {
       error: errors.array()[0],
     });
   } else {
-      next();
+    next();
   }
 };
-
-module.exports = {signUpFieldsValidation, updateUserFieldsValidation, loginFieldsValidation, checkResult}

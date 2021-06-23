@@ -1,4 +1,4 @@
-const isLogged = (req, res, next) => {
+export const isLogged = (req, res, next) => {
   if (req.isAuthenticated()) {
     res.send({
       status: 304,
@@ -9,7 +9,7 @@ const isLogged = (req, res, next) => {
   }
 };
 
-const isAuth = (req, res, next) => {
+export const isAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -19,5 +19,3 @@ const isAuth = (req, res, next) => {
     });
   }
 };
-
-module.exports = { isLogged, isAuth };

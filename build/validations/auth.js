@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isAuth = exports.isLogged = void 0;
 const isLogged = (req, res, next) => {
     if (req.isAuthenticated()) {
         res.send({
@@ -10,6 +12,7 @@ const isLogged = (req, res, next) => {
         next();
     }
 };
+exports.isLogged = isLogged;
 const isAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
         next();
@@ -21,5 +24,5 @@ const isAuth = (req, res, next) => {
         });
     }
 };
-module.exports = { isLogged, isAuth };
+exports.isAuth = isAuth;
 //# sourceMappingURL=auth.js.map
