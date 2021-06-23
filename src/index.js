@@ -1,17 +1,17 @@
-const express = require('express');
-const {cors} = require('./middlewares/middlewares');
+const express = require("express");
+const { cors } = require("./middlewares/middlewares");
 const app = express();
-const routes = require('./routes/index');
-const session = require('express-session');
-const passport = require('passport');
-const {LocalStrategy} = require('./utils/strategies')
+const routes = require("./routes/index.ts");
+const session = require("express-session");
+const passport = require("passport");
+const { LocalStrategy } = require("./utils/strategies");
 
-app.use('/views', express.static(__dirname + '/public'));
+app.use("/views", express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
-    secret: 'superkey',
+    secret: "superkey",
     resave: false,
     saveUninitialized: false,
   })
@@ -19,11 +19,9 @@ app.use(
 
 app.use(cors);
 
-
-
-app.get('/', (req, res)=>{
-	res.send('hi, estas en el inicio');
-})
+app.get("/", (req, res) => {
+  res.send("hi, estas en el inicio");
+});
 
 passport.use(LocalStrategy);
 
@@ -39,7 +37,6 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
-
-app.use('/', routes);
+app.use("/", routes);
 
 module.exports = app;

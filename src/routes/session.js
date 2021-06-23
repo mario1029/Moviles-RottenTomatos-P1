@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { isLogged, isAuth } = require('../validations/auth');
-const {signUpUser} = require('../helpers/auth');
+const {signUpUser} = require('../helpers/session');
 const {passportAuth} = require('../middlewares/middlewares')
 const {signUpFieldsValidation, loginFieldsValidation, checkResult } = require('../validations/fields');
 router.get('/',(req,res)=>{

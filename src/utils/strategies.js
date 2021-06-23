@@ -1,5 +1,5 @@
 
-const { getUserByID, comparePassword } = require('../helpers/auth');
+const { getUserByID, comparePassword } = require('../helpers/session');
 const Strategy = require('passport-local')
 
 //Nota: La cedula tambien es el el username

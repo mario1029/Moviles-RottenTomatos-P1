@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { isAuth } = require('../validations/auth');
-const { getUserByID } = require('../helpers/auth')
+const { getUserByID } = require('../helpers/session')
 const { updateUserFieldsValidation, checkResult } = require('../validations/fields');
 const {deleteUser, updateUser} = require('../helpers/users');
 
