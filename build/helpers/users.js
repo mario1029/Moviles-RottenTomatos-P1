@@ -7,17 +7,16 @@ exports.deleteUser = exports.updateUser = void 0;
 const pool_1 = __importDefault(require("../utils/pool"));
 const queries_1 = require("../utils/queries");
 const pool = pool_1.default.getInstance();
-const updateUser = async (body, id) => {
+const updateUser = async (body, idCorreo) => {
     const client = await pool.connect();
-    const { cedula, nombre, apellido, direccion } = body;
+    const { alias, correo, descripcion } = body;
     try {
         await client.query('BEGIN');
-        const response = (await client.query(queries_1.queries.UPDATE_USER, [cedula, nombre.toLowerCase(), apellido.toLowerCase(), direccion, cedula])).rows[0];
+        const response = (await client.query(queries_1.queries.UPDATE_USER_BY_EMAIL, [alias, correo, descripcion, idCorreo])).rows[0];
         const user = {
-            cedula: response.cedula,
-            nombre: response.nombre,
-            apellido: response.apellido,
-            direccion: response.direccion,
+            alias: response.alias,
+            correo: response.correo,
+            descripcion: response.descripcion,
         };
         await client.query('COMMIT');
         return user;
@@ -32,11 +31,11 @@ const updateUser = async (body, id) => {
     }
 };
 exports.updateUser = updateUser;
-const deleteUser = async (cedula) => {
+const deleteUser = async (idCorreo) => {
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response = (await client.query(queries_1.queries.DELETE_USER, [cedula])).rowCount > 0;
+        const response = (await client.query(queries_1.queries.DELETE_USER_BY_EMAIL, [idCorreo])).rowCount > 0;
         await client.query('COMMIT');
         return response;
     }

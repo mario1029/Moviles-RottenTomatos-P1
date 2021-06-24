@@ -1,8 +1,4 @@
-export declare const updateUser: (body: any, id: any) => Promise<{
-    cedula: any;
-    nombre: any;
-    apellido: any;
-    direccion: any;
-}>;
-export declare const deleteUser: (cedula: any) => Promise<boolean>;
+import { Usuario } from '@interfaces/usuario';
+export declare const updateUser: (body: any, idCorreo: any) => Promise<Usuario>;
+export declare const deleteUser: (idCorreo: any) => Promise<boolean>;
 //# sourceMappingURL=users.d.ts.map

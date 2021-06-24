@@ -1,7 +1,9 @@
-export default interface Usuario {
-  cedula: number;
-  nombre: string;
-  apellido: string;
-  direccion: string;
-  contra: string;
+export interface Usuario {
+  alias: number;
+  correo: string;
+  descripcion: string;
+}
+
+export interface UsuarioCompleto extends Usuario {
+  contrasenia?: string;
 }

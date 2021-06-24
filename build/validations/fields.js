@@ -3,22 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkResult = exports.loginFieldsValidation = exports.updateUserFieldsValidation = exports.signUpFieldsValidation = void 0;
 const express_validator_1 = require("express-validator");
 exports.signUpFieldsValidation = [
-    express_validator_1.check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
-    express_validator_1.check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
-    express_validator_1.check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
-    express_validator_1.check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
-    express_validator_1.check('contra').exists().withMessage('Debe incluir la contraseña'),
+    express_validator_1.check('alias').exists().withMessage('Es necesario un alias'),
+    express_validator_1.check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+    express_validator_1.check('descripcion').exists().withMessage('Falta descripcion').isString().withMessage('Descripcion invalida'),
+    express_validator_1.check('contrasenia').exists().withMessage('Falta una contraseña'),
 ];
 exports.updateUserFieldsValidation = [
-    express_validator_1.check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
-    express_validator_1.check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
-    express_validator_1.check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
-    express_validator_1.check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
+    express_validator_1.check('alias').exists().withMessage('Es necesario un alias'),
+    express_validator_1.check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+    express_validator_1.check('descripcion').exists().withMessage('Falta descripcion').isString().withMessage('Descripcion invalida'),
 ];
-exports.loginFieldsValidation = [
-    express_validator_1.check('cedula').exists().withMessage('Debe incluir el nombre de usuario').isString().withMessage('Nombre de usuario invalido'),
-    express_validator_1.check('contra').exists().withMessage('Debe incluir la contraseña').isString().withMessage('Contraseña invalida'),
-];
+exports.loginFieldsValidation = [express_validator_1.check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'), express_validator_1.check('contrasenia').exists().withMessage('Falta una contraseña')];
 const checkResult = (req, res, next) => {
     const errors = express_validator_1.validationResult(req);
     if (!errors.isEmpty()) {

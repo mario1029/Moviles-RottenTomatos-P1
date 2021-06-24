@@ -1,24 +1,23 @@
-import { getUserByID, comparePassword } from '../helpers/session';
+import { getUserByEmail, comparePassword } from '../helpers/session';
 import { Strategy } from 'passport-local';
-
-//Nota: La cedula tambien es el el username
+import { UsuarioCompleto } from '@interfaces/usuario';
 
 export const LocalStrategy = new Strategy(
   {
-    usernameField: 'cedula',
-    passwordField: 'contra',
+    usernameField: 'correo',
+    passwordField: 'contrasenia',
   },
-  async (cedula, contra, done) => {
+  async (correo, contrasenia, done) => {
     try {
-      const user = await getUserByID(cedula);
+      const user = await getUserByEmail(correo);
 
       if (!user) {
         return done(null, false);
       }
 
-      const isMatch = await comparePassword(contra, user.contra);
+      const isMatch = await comparePassword(contrasenia, user.contrasenia);
 
-      delete user.contra;
+      delete user.contrasenia;
       return isMatch ? done(null, user) : done(null, false);
     } catch (e) {
       return done(null, false);

@@ -1,24 +1,19 @@
 import { validationResult, check } from 'express-validator';
 
 export const signUpFieldsValidation = [
-  check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
-  check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
-  check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
-  check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
-  check('contra').exists().withMessage('Debe incluir la contraseña'),
+  check('alias').exists().withMessage('Es necesario un alias'),
+  check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+  check('descripcion').exists().withMessage('Falta descripcion').isString().withMessage('Descripcion invalida'),
+  check('contrasenia').exists().withMessage('Falta una contraseña'),
 ];
 
 export const updateUserFieldsValidation = [
-  check('cedula').exists().withMessage('Debe incluir la cedula del usuario').isInt().withMessage('Documento invalido'),
-  check('nombre').exists().withMessage('Debe incluir el nombre del usuario').isString().isLength({ min: 1 }).withMessage('El nombre no puede ser vacio'),
-  check('apellido').exists().withMessage('Debe incluir el apellido de usuario').isString().withMessage('Nombre de usuario invalido'),
-  check('direccion').exists().withMessage('Debe incluir la direccion del usuario').isString().withMessage('Direccion invalida'),
+  check('alias').exists().withMessage('Es necesario un alias'),
+  check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+  check('descripcion').exists().withMessage('Falta descripcion').isString().withMessage('Descripcion invalida'),
 ];
 
-export const loginFieldsValidation = [
-  check('cedula').exists().withMessage('Debe incluir el nombre de usuario').isString().withMessage('Nombre de usuario invalido'),
-  check('contra').exists().withMessage('Debe incluir la contraseña').isString().withMessage('Contraseña invalida'),
-];
+export const loginFieldsValidation = [check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'), check('contrasenia').exists().withMessage('Falta una contraseña')];
 
 export const checkResult = (req, res, next) => {
   const errors = validationResult(req);
