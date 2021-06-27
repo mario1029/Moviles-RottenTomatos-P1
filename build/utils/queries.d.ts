@@ -8,4 +8,12 @@ export declare const queries: {
     DELETE_USER_BY_ALIAS: string;
     DELETE_USER_BY_EMAIL: string;
 };
+export declare const movieQueries: {
+    GET_MOVIE: string;
+    GET_MOVIE_BY_TITLE: string;
+    GET_MOVIE_BY_TITLE_AND_YEAR: string;
+    GET_MOVIE_BY_GENER: string;
+    INSERT_MOVIE: string;
+    UPDATE_MOVIE: string;
+};
 //# sourceMappingURL=queries.d.ts.map
