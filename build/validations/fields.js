@@ -17,7 +17,7 @@ exports.updateUserFieldsValidation = [
 exports.loginFieldsValidation = [express_validator_2.check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'), express_validator_2.check('contrasenia').exists().withMessage('Falta una contraseña')];
 exports.commentsValidation = [
     express_validator_2.check('contenido').exists().withMessage('Debe incluir un comentario para su critica').isString().withMessage('Contenido invalido'),
-    express_validator_2.check('puntuacion').exists().withMessage('Debe incluir una puntuacion').isNumeric().isLength({ min: 1, max: 10 }).withMessage("puntuacion invalida")
+    express_validator_2.check('puntuacion').exists().withMessage('Debe incluir una puntuacion').isNumeric().withMessage("puntuacion invalida")
 ];
 const checkResult = (req, res, next) => {
     const errors = express_validator_1.validationResult(req);

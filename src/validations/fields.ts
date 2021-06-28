@@ -18,7 +18,8 @@ export const loginFieldsValidation = [check('correo').exists().withMessage('Falt
 
 export const commentsValidation=[
   check('contenido').exists().withMessage('Debe incluir un comentario para su critica').isString().withMessage('Contenido invalido'),
-  check('puntuacion').exists().withMessage('Debe incluir una puntuacion').isNumeric().isLength({ min: 1, max:10 }).withMessage("puntuacion invalida")]
+  check('puntuacion').exists().withMessage('Debe incluir una puntuacion').isNumeric().withMessage("puntuacion invalida")
+];
 
 export const checkResult = (req, res, next) => {
   const errors = validationResult(req);

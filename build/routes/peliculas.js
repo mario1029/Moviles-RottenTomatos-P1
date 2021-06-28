@@ -25,7 +25,6 @@ router.get('/movie/:pelicula', async (req, res) => {
 });
 router.get('/search/gener/:genero', async (req, res) => {
     try {
-        const genero = req.params.genero;
         const pelis = await movie_1.getGener(req.params.genero);
         res.json({ status: 200, peliculas: pelis, message: "se encontraro la pelicula" });
     }
@@ -44,7 +43,6 @@ router.get('/comments/:pelicula', async (req, res) => {
 });
 router.post('/comments/:pelicula', auth_1.isAuth, fields_1.commentsValidation, fields_1.checkResult, async (req, res) => {
     try {
-        console.log("hola");
         const pelis = await movie_1.insertComment(req.params.pelicula, req.body);
         res.json({ status: 200, peliculas: pelis, message: "se encontraro la pelicula" });
     }
