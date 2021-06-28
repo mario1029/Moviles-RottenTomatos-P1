@@ -1,3 +1,5 @@
+import { IsNumericOptions } from "express-validator/src/options";
+
 export interface pelicula{
     id:string;
     titulo:string;
@@ -11,4 +13,5 @@ export interface peliculaDetallada extends pelicula{
     duracion: string;
     director: string;
     sinopsis: string;
+    rating:number;
 }

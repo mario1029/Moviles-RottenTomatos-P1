@@ -17,6 +17,8 @@ exports.movieQueries = {
     GET_MOVIE_BY_TITLE_AND_YEAR: `SELECT id_pelicula_serie,titulo, anio, tipo, poster FROM pelicula_serie where UPPER(titulo) like '%' || UPPER($1) || '%' and anio=$2`,
     GET_MOVIE_BY_GENER: `SELECT id_pelicula_serie, titulo, anio, tipo, poster FROM pelicula_serie where UPPER(genero) like '%' || UPPER($1) || '%'`,
     INSERT_MOVIE: `INSERT INTO pelicula_serie ( id_pelicula_serie, titulo, tipo, anio, poster) values ($1,$2,$3,$4,$5) RETURNING *`,
-    UPDATE_MOVIE: `UPDATE pelicula_serie SET duracion = $1, director = $2, sinopsis = $3, genero = $4 WHERE id_pelicula_serie = $5  RETURNING *`
+    UPDATE_MOVIE: `UPDATE pelicula_serie SET duracion = $1, director = $2, sinopsis = $3, genero = $4 WHERE id_pelicula_serie = $5  RETURNING *`,
+    GET_COMMENT: `SELECT * FROM comentario WHERE id_pelicula_serie=(SELECT id_pelicula_serie FROM pelicula_serie WHERE UPPER(titulo) like UPPER($1) )`,
+    INSERT_COMMENT: `INSERT INTO comentario (id_pelicula_serie, alias, contenido, puntuacion) values ((SELECT id_pelicula_serie FROM pelicula_serie WHERE UPPER(titulo) like UPPER($1)),$2,$3,$4) RETURNING *`
 };
 //# sourceMappingURL=queries.js.map

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getGener = exports.getDetailsMovie = exports.getMovie = void 0;
+exports.insertComment = exports.getComment = exports.getGener = exports.getDetailsMovie = exports.getMovie = void 0;
 const pool_1 = __importDefault(require("../utils/pool"));
 const queries_1 = require("../utils/queries");
 const api_1 = require("../utils/api");
@@ -63,7 +63,8 @@ const getDetailsMovie = async (titulo) => {
                 genero: peliculas.genero,
                 duracion: peliculas.duracion,
                 director: peliculas.director,
-                sinopsis: peliculas.sinopsis
+                sinopsis: peliculas.sinopsis,
+                rating: peliculas.rating,
             };
             console.log(peli);
             return peli;
@@ -116,4 +117,33 @@ const getGener = async (genero) => {
     }
 };
 exports.getGener = getGener;
+const getComment = async (titulo) => {
+    const client = await pool.connect();
+    const comentarios = (await client.query(queries_1.movieQueries.GET_COMMENT, [titulo])).rows;
+    const comments = comentarios.map((rows) => {
+        return {
+            usuario: rows.alias,
+            contenido: rows.contenido,
+            puntuacion: rows.puntuacion,
+            fecha: rows.fecha
+        };
+    });
+    console.log(comments);
+    return comments;
+};
+exports.getComment = getComment;
+const insertComment = async (titulo, body) => {
+    const client = await pool.connect();
+    const { alias, contenido, puntuacion } = body;
+    const comentarios = (await client.query(queries_1.movieQueries.INSERT_COMMENT, [titulo, alias, contenido, puntuacion])).rows[0];
+    const comments = {
+        usuario: comentarios.alias,
+        contenido: comentarios.contenido,
+        puntuacion: comentarios.puntuacion,
+        fecha: comentarios.fecha
+    };
+    console.log(comments);
+    return comments;
+};
+exports.insertComment = insertComment;
 //# sourceMappingURL=movie.js.map

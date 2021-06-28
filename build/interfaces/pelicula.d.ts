@@ -10,5 +10,6 @@ export interface peliculaDetallada extends pelicula {
     duracion: string;
     director: string;
     sinopsis: string;
+    rating: number;
 }
 //# sourceMappingURL=pelicula.d.ts.map

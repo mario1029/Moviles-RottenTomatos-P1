@@ -15,5 +15,7 @@ export declare const movieQueries: {
     GET_MOVIE_BY_GENER: string;
     INSERT_MOVIE: string;
     UPDATE_MOVIE: string;
+    GET_COMMENT: string;
+    INSERT_COMMENT: string;
 };
 //# sourceMappingURL=queries.d.ts.map

@@ -58,7 +58,8 @@ const detallarPeli = async (titulo) => {
         genero: res.Genre,
         duracion: res.Runtime,
         director: res.Director,
-        sinopsis: res.Plot
+        sinopsis: res.Plot,
+        rating: 0.0
     };
     return peli;
 };

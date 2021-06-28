@@ -1,6 +1,7 @@
+import { isAuth } from '../validations/auth';
+import { checkResult, commentsValidation } from '../validations/fields';
 import { Router } from 'express';
-import {getDetailsMovie, getGener, getMovie} from '../helpers/movie'
-import {buscarPeli,detallarPeli} from '../utils/api'
+import {getComment, getDetailsMovie, getGener, getMovie, insertComment} from '../helpers/movie'
 const router=Router();
 
 router.get('/search/:titulo', async (req,res)=>{
@@ -13,9 +14,9 @@ router.get('/search/:titulo', async (req,res)=>{
     }
 })
 
-router.get('/movie/', async(req,res)=>{
+router.get('/movie/:pelicula', async(req,res)=>{
     try{
-        const pelis= await getDetailsMovie(req.body.pelicula);
+        const pelis= await getDetailsMovie(req.params.pelicula);
         res.json({status: 200, peliculas:pelis,message:"se encontraro la pelicula" })
     }catch(e){
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener la pelicula' });
@@ -24,12 +25,29 @@ router.get('/movie/', async(req,res)=>{
 
 router.get('/search/gener/:genero',async(req,res)=>{
     try{
-        const genero=req.params.genero;
         const pelis= await getGener(req.params.genero);
         res.json({status: 200, peliculas:pelis,message:"se encontraro la pelicula" })
     }catch(e){
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener la pelicula' });
     }
 }) 
+
+router.get('/comments/:pelicula', async(req,res)=>{
+    try{
+        const pelis= await getComment(req.params.pelicula);
+        res.json({status: 200, peliculas:pelis,message:"se encontraro la pelicula" })
+    }catch(e){
+        res.status(500).json({ status: 500, error: e, message: 'Error al obtener la pelicula' });
+    }
+})
+
+router.post('/comments/:pelicula',isAuth,commentsValidation,checkResult, async(req,res)=>{
+    try{
+        const pelis= await insertComment(req.params.pelicula,req.body);
+        res.json({status: 200, peliculas:pelis,message:"se encontraro la pelicula" })
+    }catch(e){
+        res.status(500).json({ status: 500, error: e, message: 'Error al obtener la pelicula' });
+    }
+})
 
 export default router;

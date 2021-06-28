@@ -2,6 +2,7 @@ import Pool from '../utils/pool';
 import { movieQueries } from '../utils/queries';
 import {pelicula,peliculaDetallada} from '../interfaces/pelicula'
 import { buscarPeli, detallarPeli } from '../utils/api';
+import { comentario } from '@interfaces/comentario';
 
 const pool = Pool.getInstance();
 
@@ -60,7 +61,8 @@ export const getDetailsMovie=async(titulo:string): Promise<peliculaDetallada>=>{
             genero:peliculas.genero,
             duracion:peliculas.duracion,
             director:peliculas.director,
-            sinopsis:peliculas.sinopsis
+            sinopsis:peliculas.sinopsis,
+            rating:peliculas.rating,
         }
         console.log(peli)
     return peli;
@@ -108,4 +110,33 @@ export const getGener=async (genero:string): Promise<pelicula[]>=>{
   } catch (e) {
       throw e;
   }
+}
+
+export const getComment=async(titulo:string):Promise<comentario[]>=>{
+    const client = await pool.connect();
+    const comentarios= (await client.query(movieQueries.GET_COMMENT,[titulo])).rows;
+    const comments:comentario[]=comentarios.map((rows)=>{
+        return{
+           usuario:rows.alias, 
+           contenido:rows.contenido,
+           puntuacion:rows.puntuacion,
+           fecha:rows.fecha
+        }        
+    })
+    console.log(comments);
+    return comments;
+}
+
+export const insertComment=async(titulo, body):Promise<comentario>=>{
+    const client = await pool.connect();
+    const {alias,contenido,puntuacion}=body;
+    const comentarios= (await client.query(movieQueries.INSERT_COMMENT,[titulo,alias,contenido,puntuacion])).rows[0];
+    const comments:comentario={
+           usuario:comentarios.alias, 
+           contenido:comentarios.contenido,
+           puntuacion:comentarios.puntuacion,
+           fecha:comentarios.fecha        
+    }
+    console.log(comments);
+    return comments;
 }
