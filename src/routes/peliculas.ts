@@ -1,7 +1,7 @@
-import { isAuth } from '../validations/auth';
-import { checkResult, commentsValidation } from '../validations/fields';
+import { isAuth } from '@validations/auth';
+import { checkResult, commentsValidation } from '@validations/fields';
 import { Router } from 'express';
-import {getComment, getDetailsMovie, getGener, getMovie, insertComment} from '../helpers/movie'
+import {getComment, getDetailsMovie, getGener, getMovie, insertComment} from '@helpers/movie'
 const router=Router();
 
 router.get('/search/:titulo', async (req,res)=>{

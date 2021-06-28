@@ -3,12 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("./config/alias");
 const express_1 = __importDefault(require("express"));
-const middlewares_1 = require("./middlewares/middlewares");
-const index_js_1 = __importDefault(require("./routes/index.js"));
+const middlewares_1 = require("@middlewares/middlewares");
+const routes_1 = __importDefault(require("./routes"));
 const express_session_1 = __importDefault(require("express-session"));
 const passport_1 = __importDefault(require("passport"));
-const strategies_1 = require("./utils/strategies");
+const strategies_1 = require("@utils/strategies");
 const app = express_1.default();
 app.use('/views', express_1.default.static(__dirname + '/public'));
 app.use(express_1.default.json());
@@ -31,6 +32,6 @@ passport_1.default.deserializeUser((user, done) => {
 });
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
-app.use('/', index_js_1.default);
+app.use('/', routes_1.default);
 exports.default = app;
 //# sourceMappingURL=index.js.map

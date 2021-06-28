@@ -2,23 +2,26 @@ import { validationResult } from 'express-validator';
 import { check } from 'express-validator';
 
 export const signUpFieldsValidation = [
-  check('alias').exists().withMessage('Es necesario un alias'),
-  check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
-  check('descripcion').exists().withMessage('Falta descripcion').isString().withMessage('Descripcion invalida'),
-  check('contrasenia').exists().withMessage('Falta una contraseña'),
+  check('alias').notEmpty({ ignore_whitespace: true }).withMessage('Es necesario un alias').isString().isLength({min:4}).withMessage('Alias invalido, de tener por lo menos 4 caracteres'),
+  check('correo').notEmpty({ ignore_whitespace: true }).withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+  check('descripcion').notEmpty({ ignore_whitespace: true }).withMessage('Falta descripcion').isString().isLength({min:10}).withMessage('Descripcion invalida'),
+  check('contrasenia').notEmpty({ ignore_whitespace: true }).withMessage('Falta una contraseña').isLength({min:4, max:20}).withMessage('Contrasenia invalida, debe tener una longitud de 4 a 20 caracteres'),
 ];
 
 export const updateUserFieldsValidation = [
-  check('alias').exists().withMessage('Es necesario un alias'),
-  check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
-  check('descripcion').exists().withMessage('Falta descripcion').isString().withMessage('Descripcion invalida'),
+  check('alias').notEmpty({ ignore_whitespace: true }).withMessage('Es necesario un alias').isString().isLength({min:4}).withMessage('Alias invalido, de tener por lo menos 4 caracteres'),
+  check('correo').notEmpty({ ignore_whitespace: true }).withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+  check('descripcion').notEmpty({ ignore_whitespace: true }).withMessage('Falta descripcion').isString().isLength({min:10}).withMessage('Descripcion invalida'),
 ];
 
-export const loginFieldsValidation = [check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'), check('contrasenia').exists().withMessage('Falta una contraseña')];
+export const loginFieldsValidation = [
+  check('correo').notEmpty({ ignore_whitespace: true }).withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+  check('contrasenia').notEmpty({ ignore_whitespace: true }).withMessage('Falta una contraseña').isLength({min:4, max:20}).withMessage('Contrasenia invalida, debe tener una longitud de 4 a 20 caracteres')
+];
 
 export const commentsValidation=[
-  check('contenido').exists().withMessage('Debe incluir un comentario para su critica').isString().withMessage('Contenido invalido'),
-  check('puntuacion').exists().withMessage('Debe incluir una puntuacion').isNumeric().withMessage("puntuacion invalida")
+  check('contenido').notEmpty({ ignore_whitespace: true }).withMessage('Debe incluir un comentario para su critica').isString().isLength({min:10}).withMessage('Contenido invalido'),
+  check('puntuacion').notEmpty({ ignore_whitespace: true }).withMessage('Debe incluir una puntuacion').isNumeric().withMessage("puntuacion invalida")
 ];
 
 export const checkResult = (req, res, next) => {

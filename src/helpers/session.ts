@@ -1,7 +1,7 @@
-import Pool from '../utils/pool';
-import { queries } from '../utils/queries';
+import Pool from '@utils/pool';
+import { queries } from '@utils/queries';
 import { compare, genSaltSync, hashSync } from 'bcryptjs';
-import { UsuarioCompleto } from '../interfaces/usuario';
+import { UsuarioCompleto } from '@interfaces/usuario';
 
 const pool = Pool.getInstance();
 

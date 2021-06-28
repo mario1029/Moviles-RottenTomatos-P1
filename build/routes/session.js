@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const auth_1 = require("../validations/auth");
-const session_1 = require("../helpers/session");
-const middlewares_1 = require("../middlewares/middlewares");
-const fields_1 = require("../validations/fields");
+const auth_1 = require("@validations/auth");
+const session_1 = require("@helpers/session");
+const middlewares_1 = require("@middlewares/middlewares");
+const fields_1 = require("@validations/fields");
 const router = express_1.Router();
 router.get('/', (req, res) => {
     res.send('Aqui estan las cosas de login');

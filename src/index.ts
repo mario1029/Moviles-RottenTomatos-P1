@@ -1,9 +1,10 @@
+import './config/alias'
 import express from 'express';
-import { cors } from './middlewares/middlewares';
-import routes from './routes/index.js';
+import { cors } from '@middlewares/middlewares';
+import routes from './routes';
 import session from 'express-session';
 import passport from 'passport';
-import { LocalStrategy } from './utils/strategies';
+import { LocalStrategy } from '@utils/strategies';
 
 const app = express();
 

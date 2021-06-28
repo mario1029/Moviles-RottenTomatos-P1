@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const auth_1 = require("../validations/auth");
-const session_1 = require("../helpers/session");
-const fields_1 = require("../validations/fields");
-const users_1 = require("../helpers/users");
+const auth_1 = require("@validations/auth");
+const session_1 = require("@helpers/session");
+const fields_1 = require("@validations/fields");
+const users_1 = require("@helpers/users");
 const router = express_1.Router();
 router.get('/:correo', auth_1.isAuth, async (req, res) => {
     const data = await session_1.getUserByEmail(req.params.correo);

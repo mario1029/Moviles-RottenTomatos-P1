@@ -1,4 +1,4 @@
-import { pelicula, peliculaDetallada } from '../interfaces/pelicula';
+import { pelicula, peliculaDetallada } from '@interfaces/pelicula';
 import { comentario } from '@interfaces/comentario';
 export declare const getMovie: (titulo: any, body: any) => Promise<pelicula[]>;
 export declare const getDetailsMovie: (titulo: string) => Promise<peliculaDetallada>;

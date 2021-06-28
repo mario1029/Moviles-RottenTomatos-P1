@@ -1,7 +1,7 @@
-import Pool from '../utils/pool';
-import { movieQueries } from '../utils/queries';
-import {pelicula,peliculaDetallada} from '../interfaces/pelicula'
-import { buscarPeli, detallarPeli } from '../utils/api';
+import Pool from '@utils/pool';
+import { movieQueries } from '@utils/queries';
+import {pelicula,peliculaDetallada} from '@interfaces/pelicula'
+import { buscarPeli, detallarPeli } from '@utils/api';
 import { comentario } from '@interfaces/comentario';
 
 const pool = Pool.getInstance();

@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = void 0;
-const pool_1 = __importDefault(require("../utils/pool"));
-const queries_1 = require("../utils/queries");
+const pool_1 = __importDefault(require("@utils/pool"));
+const queries_1 = require("@utils/queries");
 const pool = pool_1.default.getInstance();
 const updateUser = async (body, idCorreo) => {
     const client = await pool.connect();

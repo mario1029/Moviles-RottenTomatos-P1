@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { isAuth } from '../validations/auth';
-import { getUserByEmail } from '../helpers/session';
-import { updateUserFieldsValidation, checkResult } from '../validations/fields';
-import { deleteUser, updateUser } from '../helpers/users';
+import { isAuth } from '@validations/auth';
+import { getUserByEmail } from '@helpers/session';
+import { updateUserFieldsValidation, checkResult } from '@validations/fields';
+import { deleteUser, updateUser } from '@helpers/users';
 
 const router = Router();
 

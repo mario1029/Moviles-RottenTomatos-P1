@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { isLogged, isAuth } from '../validations/auth';
-import { signUpUser } from '../helpers/session';
-import { passportAuth } from '../middlewares/middlewares';
-import { signUpFieldsValidation, loginFieldsValidation, checkResult } from '../validations/fields';
+import { isLogged, isAuth } from '@validations/auth';
+import { signUpUser } from '@helpers/session';
+import { passportAuth } from '@middlewares/middlewares';
+import { signUpFieldsValidation, loginFieldsValidation, checkResult } from '@validations/fields';
 
 const router = Router();
 

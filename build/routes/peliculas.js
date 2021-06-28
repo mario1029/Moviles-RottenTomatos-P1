@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const auth_1 = require("../validations/auth");
-const fields_1 = require("../validations/fields");
+const auth_1 = require("@validations/auth");
+const fields_1 = require("@validations/fields");
 const express_1 = require("express");
-const movie_1 = require("../helpers/movie");
+const movie_1 = require("@helpers/movie");
 const router = express_1.Router();
 router.get('/search/:titulo', async (req, res) => {
     try {

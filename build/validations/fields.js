@@ -4,20 +4,23 @@ exports.checkResult = exports.commentsValidation = exports.loginFieldsValidation
 const express_validator_1 = require("express-validator");
 const express_validator_2 = require("express-validator");
 exports.signUpFieldsValidation = [
-    express_validator_2.check('alias').exists().withMessage('Es necesario un alias'),
-    express_validator_2.check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
-    express_validator_2.check('descripcion').exists().withMessage('Falta descripcion').isString().withMessage('Descripcion invalida'),
-    express_validator_2.check('contrasenia').exists().withMessage('Falta una contraseña'),
+    express_validator_2.check('alias').notEmpty({ ignore_whitespace: true }).withMessage('Es necesario un alias').isString().isLength({ min: 4 }).withMessage('Alias invalido, de tener por lo menos 4 caracteres'),
+    express_validator_2.check('correo').notEmpty({ ignore_whitespace: true }).withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+    express_validator_2.check('descripcion').notEmpty({ ignore_whitespace: true }).withMessage('Falta descripcion').isString().isLength({ min: 10 }).withMessage('Descripcion invalida'),
+    express_validator_2.check('contrasenia').notEmpty({ ignore_whitespace: true }).withMessage('Falta una contraseña').isLength({ min: 4, max: 20 }).withMessage('Contrasenia invalida, debe tener una longitud de 4 a 20 caracteres'),
 ];
 exports.updateUserFieldsValidation = [
-    express_validator_2.check('alias').exists().withMessage('Es necesario un alias'),
-    express_validator_2.check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
-    express_validator_2.check('descripcion').exists().withMessage('Falta descripcion').isString().withMessage('Descripcion invalida'),
+    express_validator_2.check('alias').notEmpty({ ignore_whitespace: true }).withMessage('Es necesario un alias').isString().isLength({ min: 4 }).withMessage('Alias invalido, de tener por lo menos 4 caracteres'),
+    express_validator_2.check('correo').notEmpty({ ignore_whitespace: true }).withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+    express_validator_2.check('descripcion').notEmpty({ ignore_whitespace: true }).withMessage('Falta descripcion').isString().isLength({ min: 10 }).withMessage('Descripcion invalida'),
 ];
-exports.loginFieldsValidation = [express_validator_2.check('correo').exists().withMessage('Falta un correo').isEmail().withMessage('Correo invalido'), express_validator_2.check('contrasenia').exists().withMessage('Falta una contraseña')];
+exports.loginFieldsValidation = [
+    express_validator_2.check('correo').notEmpty({ ignore_whitespace: true }).withMessage('Falta un correo').isEmail().withMessage('Correo invalido'),
+    express_validator_2.check('contrasenia').notEmpty({ ignore_whitespace: true }).withMessage('Falta una contraseña').isLength({ min: 4, max: 20 }).withMessage('Contrasenia invalida, debe tener una longitud de 4 a 20 caracteres')
+];
 exports.commentsValidation = [
-    express_validator_2.check('contenido').exists().withMessage('Debe incluir un comentario para su critica').isString().withMessage('Contenido invalido'),
-    express_validator_2.check('puntuacion').exists().withMessage('Debe incluir una puntuacion').isNumeric().withMessage("puntuacion invalida")
+    express_validator_2.check('contenido').notEmpty({ ignore_whitespace: true }).withMessage('Debe incluir un comentario para su critica').isString().isLength({ min: 10 }).withMessage('Contenido invalido'),
+    express_validator_2.check('puntuacion').notEmpty({ ignore_whitespace: true }).withMessage('Debe incluir una puntuacion').isNumeric().withMessage("puntuacion invalida")
 ];
 const checkResult = (req, res, next) => {
     const errors = express_validator_1.validationResult(req);

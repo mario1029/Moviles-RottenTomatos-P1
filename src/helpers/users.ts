@@ -1,5 +1,5 @@
-import Pool from '../utils/pool';
-import { queries } from '../utils/queries';
+import Pool from '@utils/pool';
+import { queries } from '@utils/queries';
 import { Usuario } from '@interfaces/usuario';
 
 const pool = Pool.getInstance();

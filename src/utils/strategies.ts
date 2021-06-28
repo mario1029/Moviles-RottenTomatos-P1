@@ -1,4 +1,4 @@
-import { getUserByEmail, comparePassword } from '../helpers/session';
+import { getUserByEmail, comparePassword } from '@helpers/session';
 import { Strategy } from 'passport-local';
 import { UsuarioCompleto } from '@interfaces/usuario';
 

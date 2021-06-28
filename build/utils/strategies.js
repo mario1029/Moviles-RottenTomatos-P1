@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocalStrategy = void 0;
-const session_1 = require("../helpers/session");
+const session_1 = require("@helpers/session");
 const passport_local_1 = require("passport-local");
 exports.LocalStrategy = new passport_local_1.Strategy({
     usernameField: 'correo',
