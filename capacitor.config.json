@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "RottenTomatoes_Moviles",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

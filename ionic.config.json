@@ -1,0 +1,8 @@
+{
+  "name": "RottenTomatoes_Moviles",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "97212b0e"
+}
