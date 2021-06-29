@@ -132,9 +132,9 @@ const getComment = async (titulo) => {
     return comments;
 };
 exports.getComment = getComment;
-const insertComment = async (titulo, body) => {
+const insertComment = async (titulo, body, alias) => {
     const client = await pool.connect();
-    const { alias, contenido, puntuacion } = body;
+    const { contenido, puntuacion } = body;
     const comentarios = (await client.query(queries_1.movieQueries.INSERT_COMMENT, [titulo, alias, contenido, puntuacion])).rows[0];
     const comments = {
         usuario: comentarios.alias,

@@ -43,7 +43,8 @@ router.get('/comments/:pelicula', async (req, res) => {
 });
 router.post('/comments/:pelicula', auth_1.isAuth, fields_1.commentsValidation, fields_1.checkResult, async (req, res) => {
     try {
-        const pelis = await movie_1.insertComment(req.params.pelicula, req.body);
+        console.log(req.session.alias);
+        const pelis = await movie_1.insertComment(req.params.pelicula, req.body, req.session.alias);
         res.json({ status: 200, peliculas: pelis, message: "se encontraro la pelicula" });
     }
     catch (e) {

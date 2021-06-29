@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 });
 router.get('/logout', auth_1.isAuth, (req, res) => {
     req.logout();
+    req.session.alias = null;
     res.json({ status: 200, message: 'Sesión finalizada.' });
 });
 router.post('/signup', fields_1.signUpFieldsValidation, fields_1.checkResult, async (req, res) => {

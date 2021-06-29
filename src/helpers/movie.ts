@@ -127,9 +127,9 @@ export const getComment=async(titulo:string):Promise<comentario[]>=>{
     return comments;
 }
 
-export const insertComment=async(titulo, body):Promise<comentario>=>{
+export const insertComment=async(titulo, body,alias):Promise<comentario>=>{
     const client = await pool.connect();
-    const {alias,contenido,puntuacion}=body;
+    const {contenido,puntuacion}=body;
     const comentarios= (await client.query(movieQueries.INSERT_COMMENT,[titulo,alias,contenido,puntuacion])).rows[0];
     const comments:comentario={
            usuario:comentarios.alias, 

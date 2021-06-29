@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 
 router.get('/logout', isAuth, (req: any, res) => {
   req.logout();
+  req.session.alias=null;
   res.json({ status: 200, message: 'Sesión finalizada.' });
 });
 

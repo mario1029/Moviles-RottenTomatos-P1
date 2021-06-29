@@ -1,6 +1,8 @@
 import passport from 'passport';
 
 export const passportAuth = (req, res, next) => {
+  req.session.alias=req.body.correo;
+  console.log(req.session.alias);
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       return next(err);

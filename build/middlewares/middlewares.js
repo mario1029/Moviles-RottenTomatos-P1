@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.cors = exports.passportAuth = void 0;
 const passport_1 = __importDefault(require("passport"));
 const passportAuth = (req, res, next) => {
+    req.session.alias = req.body.correo;
+    console.log(req.session.alias);
     passport_1.default.authenticate('local', (err, user, info) => {
         if (err) {
             return next(err);
