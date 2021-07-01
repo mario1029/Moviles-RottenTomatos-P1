@@ -13,8 +13,8 @@ export class ProfilePage implements OnInit {
   private correo: string;
   getUsuario() {
     if (localStorage.getItem('correo') !== null && localStorage.getItem('correo') !== '') {
-      this.correo = localStorage.getItem('tocorreoken');
-
+      this.correo = localStorage.getItem('correo');
+      console.log('Perfil:' + this.correo);
       this.servicio.getUsuario(this.correo).subscribe((data) => {
         console.log(data);
       });
