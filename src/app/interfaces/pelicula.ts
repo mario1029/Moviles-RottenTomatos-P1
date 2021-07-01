@@ -1,5 +1,3 @@
-import { IsNumericOptions } from "express-validator/src/options";
-
 export interface pelicula{
     id:string;
     titulo:string;

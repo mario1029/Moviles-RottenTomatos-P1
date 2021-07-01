@@ -8,28 +8,21 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-col>
-      <ion-row>
-        <div>
-          <ion-item>
-            <ion-label required="true" type="text" placeholder="usuario123">Alias</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </div>
-      </ion-row>
+  <ion-list>
+    <ion-item>
+      <ion-label required="true" type="email" >Correo</ion-label>
+      <ion-input #mail></ion-input>
+    </ion-item>
 
-      <ion-row>
-        <div>
-          <ion-item>
-            <ion-label required="true" type="password" placeholder="micontra123#">Contraseña</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </div>
-      </ion-row>
-      <ion-row>
-        <ion-button (click)="loginUsuario()">Iniciar Sesion</ion-button>
-      </ion-row>
-    </ion-col>
-  </ion-grid>
+    <ion-item>
+      <ion-label required="true" type="password" >Contraseña</ion-label>
+      <ion-input #pass></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-button (click)="loginUsuario(mail, pass)">Iniciar Sesion</ion-button>
+    </ion-item>
+      
+  </ion-list>
+  
 </ion-content>
