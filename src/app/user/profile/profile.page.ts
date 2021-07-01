@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { UsuarioCompleto } from '../../interfaces/usuario';
+import { Usuario, UsuarioCompleto } from '../../interfaces/usuario';
 
 @Component({
   selector: 'app-profile',
@@ -10,17 +10,29 @@ import { UsuarioCompleto } from '../../interfaces/usuario';
 export class ProfilePage implements OnInit {
   constructor(private servicio: UsuarioService) {}
 
-  private correo: string;
+  private user: Usuario;
+
   getUsuario() {
     if (localStorage.getItem('correo') !== null && localStorage.getItem('correo') !== '') {
-      this.correo = localStorage.getItem('correo');
-      console.log('Perfil:' + this.correo);
-      this.servicio.getUsuario(this.correo).subscribe((data) => {
+      const correo = localStorage.getItem('correo');
+      console.log('Perfil:' + correo);
+      this.servicio.getUsuario(correo).subscribe((data: any) => {
         console.log(data);
+        this.user = {
+          alias: data.alias,
+          correo: data.nombre,
+          descripcion: data.descripcion,
+        };
       });
+    } else {
+      this.user = null;
     }
   }
 
+  logout() {
+    localStorage.setItem('correo', '');
+    console.log('Perfil Cerrado:' + localStorage.getItem('correo'));
+  }
   updateUsuario() {
     const usuario: UsuarioCompleto = {
       alias: 'Revilla2202',
@@ -40,6 +52,12 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.user = {
+      alias: '',
+      correo: '',
+      descripcion: '',
+    };
+
     this.getUsuario();
   }
 }

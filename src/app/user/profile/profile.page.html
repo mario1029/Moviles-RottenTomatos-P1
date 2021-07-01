@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Perfil:</ion-title>
+    <ion-title>Perfil:{{user.alias}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,21 +12,30 @@
     <ion-col>
       <ion-row>
         <div>
-          <h3>Alias:</h3>
+          <h3>Alias:{{user.alias}}</h3>
         </div>
       </ion-row>
 
         <ion-row>
           <div>
-            <h3>Correo:</h3>
+            <h3>Correo:{{user.correo}}</h3>
           </div>
         </ion-row>
 
           <ion-row>
             <div>
-              <h3>Descripcion</h3>
+              <h3>Descripcion:{{user.descripcion}}</h3>
             </div>
           </ion-row>
     </ion-col>
   </ion-grid>
+  <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12" class="ion-text-center">
+            <a routerLink="/home" routerLinkActive="active">
+              <ion-button (click)="logout()" >Cerrar Sesion</ion-button>
+            </a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 </ion-content>
