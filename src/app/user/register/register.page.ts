@@ -8,24 +8,20 @@ import { UsuarioCompleto } from '../../interfaces/usuario';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  constructor(private servicio: UsuarioService) {}
 
-  constructor(private servicio:UsuarioService) { }
-
-  
-  registro(){
-    const usuario:UsuarioCompleto={
-      alias:'Jimenez202',
-      correo:'josejimenez@gmail.com',
-      contrasenia:'samuel0403',
-      descripcion:'aaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+  registro(alias, contrasenia, correo, descripcion) {
+    const usuario: UsuarioCompleto = {
+      alias: alias.value,
+      correo: correo.value,
+      contrasenia: contrasenia.value,
+      descripcion: descripcion.value,
     };
-    this.servicio.registro(usuario)
-    .subscribe((data)=>{
-      console.log(data)
-    })
-  }
-  
-  ngOnInit() {
+    console.log(usuario);
+    this.servicio.registro(usuario).subscribe((data) => {
+      console.log(data);
+    });
   }
 
+  ngOnInit() {}
 }

@@ -20,7 +20,13 @@
     </ion-item>
 
     <ion-item>
-      <ion-button (click)="loginUsuario(mail, pass)">Iniciar Sesion</ion-button>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12" class="ion-text-center">
+            <ion-button (click)="loginUsuario(mail, pass)">Iniciar Sesion</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
       
   </ion-list>

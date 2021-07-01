@@ -12,6 +12,7 @@ export class LoginPage implements OnInit {
 
   private correo: string;
   private contrasenia: string;
+
   loginUsuario(email, pass) {
     this.correo = email.value;
     this.contrasenia = pass.value;
@@ -20,9 +21,14 @@ export class LoginPage implements OnInit {
       correo: this.correo,
       contrasenia: this.contrasenia,
     };
+
     console.log(usuario);
-    this.servicio.login(usuario).subscribe((data) => {
+    this.servicio.login(usuario).subscribe((data: any) => {
       console.log(data);
+      if (data.status == 'Login successful!') {
+        localStorage.setItem('correo', this.correo);
+        console.log(localStorage.getItem('correo'));
+      }
     });
   }
 

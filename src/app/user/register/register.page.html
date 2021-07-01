@@ -8,47 +8,50 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-col>
-      <ion-row>
-        <div>
-          <ion-item>
-            <ion-label required="true" type="text" placeholder="usuario123">Alias</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </div>
-      </ion-row>
+  <ion-list>
+    <ion-grid>
+      <ion-col>
+        <ion-row>
+          <div>
+            <ion-item>
+              <ion-label required="true" type="text" placeholder="usuario123">Alias</ion-label>
+              <ion-input #alias></ion-input>
+            </ion-item>
+          </div>
+        </ion-row>
 
-      <ion-row>
-        <div>
-          <ion-item>
-            <ion-label required="true" type="password" placeholder="micontra123#">Contraseña</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </div>
-      </ion-row>
+        <ion-row>
+          <div>
+            <ion-item>
+              <ion-label required="true" type="password" placeholder="micontra123#">Contraseña</ion-label>
+              <ion-input #contrasenia></ion-input>
+            </ion-item>
+          </div>
+        </ion-row>
 
-      <ion-row>
-        <div>
-          <ion-item>
-            <ion-label required="true" type="email" placeholder="algo@gmail.com">Correo</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </div>
-      </ion-row>
+        <ion-row>
+          <div>
+            <ion-item>
+              <ion-label required="true" type="email" placeholder="algo@gmail.com">Correo</ion-label>
+              <ion-input #correo></ion-input>
+            </ion-item>
+          </div>
+        </ion-row>
 
-      <ion-row>
-        <div>
-          <ion-item>
-            <ion-label required="true" type="text" placeholder="Hola, me llamo ...">Descripcion</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </div>
-      </ion-row>
-
-      <ion-row>
-        <ion-button>Registrar</ion-button>
-      </ion-row>
-    </ion-col>
-  </ion-grid>
+        <ion-row>
+          <div>
+            <ion-item >
+              <ion-label required="true" type="text" placeholder="Hola, me llamo ...">Descripcion</ion-label>
+              <ion-input #descripcion></ion-input>
+            </ion-item>
+          </div>
+        </ion-row>
+        
+        <ion-row>
+              <ion-button expand="block" (click)="registro(alias, contrasenia, correo, descripcion)">Registrar</ion-button>
+        </ion-row>
+        
+      </ion-col>
+    </ion-grid>
+  </ion-list>
 </ion-content>
