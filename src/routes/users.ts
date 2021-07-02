@@ -6,12 +6,12 @@ import { deleteUser, updateUser } from '@helpers/users';
 
 const router = Router();
 
-router.get('/:correo', isAuth, async (req, res) => {
+router.get('/:correo', async (req, res) => {
   const data = await getUserByEmail(req.params.correo);
   res.send({ alias: data.alias, nombre: data.correo, descripcion: data.descripcion });
 });
 
-router.put('/:correo', isAuth, updateUserFieldsValidation, checkResult, async (req, res) => {
+router.put('/:correo', updateUserFieldsValidation, checkResult, async (req, res) => {
   const correo = req.params.correo;
   try {
     const data = await updateUser(req.body, correo);
@@ -21,7 +21,7 @@ router.put('/:correo', isAuth, updateUserFieldsValidation, checkResult, async (r
   }
 });
 
-router.delete('/:correo', isAuth, async (req, res) => {
+router.delete('/:correo', async (req, res) => {
   const correo = req.params.correo;
   try {
     const data = await deleteUser(correo);

@@ -10,39 +10,46 @@ const api_1 = require("@utils/api");
 const pool = pool_1.default.getInstance();
 const getMovie = async (titulo, body) => {
     const client = await pool.connect();
-    const { tipo, anio, page } = body;
-    const peliculas = (await client.query(queries_1.movieQueries.GET_MOVIE_BY_TITLE, [titulo])).rows;
-    console.log(peliculas.length > 0);
-    if (peliculas.length > 0) {
-        const peli = peliculas.map((pel) => {
-            return {
-                id: pel.id_pelicula_serie,
-                titulo: pel.titulo,
-                anio: pel.anio,
-                tipo: pel.tipo,
-                poster: pel.poster
-            };
-        });
-        console.log(peli);
-        return peli;
+    try {
+        const peliculas = (await client.query(queries_1.movieQueries.GET_MOVIE_BY_TITLE, [titulo])).rows;
+        console.log(peliculas.length > 0);
+        if (peliculas.length > 0) {
+            const peli = peliculas.map((pel) => {
+                return {
+                    id: pel.id_pelicula_serie,
+                    titulo: pel.titulo,
+                    anio: pel.anio,
+                    tipo: pel.tipo,
+                    poster: pel.poster
+                };
+            });
+            console.log(peli);
+            return peli;
+        }
+        else {
+            const peli = await api_1.buscarPeli(titulo, body);
+            console.log(peli);
+            //guardar datos en la bd
+            peli.map(async (rows) => {
+                try {
+                    await client.query("BEGIN");
+                    const peli_guardada = await client.query(queries_1.movieQueries.INSERT_MOVIE, [rows.id, rows.titulo, rows.tipo, rows.anio, rows.poster]);
+                    console.log(peli_guardada);
+                    await client.query("COMMIT");
+                }
+                catch (e) {
+                    await client.query("CALLBACK");
+                    throw e;
+                }
+            });
+            return peli;
+        }
     }
-    else {
-        const peli = await api_1.buscarPeli(titulo, body);
-        console.log(peli);
-        //guardar datos en la bd
-        peli.map(async (rows) => {
-            try {
-                await client.query("BEGIN");
-                const peli_guardada = await client.query(queries_1.movieQueries.INSERT_MOVIE, [rows.id, rows.titulo, rows.tipo, rows.anio, rows.poster]);
-                console.log(peli_guardada);
-                await client.query("COMMIT");
-            }
-            catch (e) {
-                await client.query("CALLBACK");
-                throw e;
-            }
-        });
-        return peli;
+    catch (e) {
+        throw e;
+    }
+    finally {
+        client.release();
     }
 };
 exports.getMovie = getMovie;
@@ -92,11 +99,14 @@ const getDetailsMovie = async (titulo) => {
         console.log(e);
         throw e;
     }
+    finally {
+        client.release();
+    }
 };
 exports.getDetailsMovie = getDetailsMovie;
 const getGener = async (genero) => {
+    const client = await pool.connect();
     try {
-        const client = await pool.connect();
         console.log("hola");
         const peliculas = (await client.query(queries_1.movieQueries.GET_MOVIE_BY_GENER, [genero])).rows;
         console.log(peliculas);
@@ -115,6 +125,9 @@ const getGener = async (genero) => {
     catch (e) {
         throw e;
     }
+    finally {
+        client.release();
+    }
 };
 exports.getGener = getGener;
 const getComment = async (titulo) => {
@@ -129,21 +142,32 @@ const getComment = async (titulo) => {
         };
     });
     console.log(comments);
+    client.release();
     return comments;
 };
 exports.getComment = getComment;
-const insertComment = async (titulo, body, alias) => {
+const insertComment = async (titulo, body) => {
     const client = await pool.connect();
-    const { contenido, puntuacion } = body;
-    const comentarios = (await client.query(queries_1.movieQueries.INSERT_COMMENT, [titulo, alias, contenido, puntuacion])).rows[0];
-    const comments = {
-        usuario: comentarios.alias,
-        contenido: comentarios.contenido,
-        puntuacion: comentarios.puntuacion,
-        fecha: comentarios.fecha
-    };
-    console.log(comments);
-    return comments;
+    try {
+        const { usuario, contenido, puntuacion } = body;
+        console.log(usuario, contenido, puntuacion);
+        const comentarios = (await client.query(queries_1.movieQueries.INSERT_COMMENT, [titulo, usuario, contenido, puntuacion])).rows[0];
+        const comments = {
+            usuario: comentarios.alias,
+            contenido: comentarios.contenido,
+            puntuacion: comentarios.puntuacion,
+            fecha: comentarios.fecha
+        };
+        console.log(comments);
+        return comments;
+    }
+    catch (e) {
+        console.log(e);
+        throw e;
+    }
+    finally {
+        client.release();
+    }
 };
 exports.insertComment = insertComment;
 //# sourceMappingURL=movie.js.map

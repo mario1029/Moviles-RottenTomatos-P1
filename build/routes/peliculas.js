@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const auth_1 = require("@validations/auth");
 const fields_1 = require("@validations/fields");
 const express_1 = require("express");
 const movie_1 = require("@helpers/movie");
@@ -41,13 +40,15 @@ router.get('/comments/:pelicula', async (req, res) => {
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener la pelicula' });
     }
 });
-router.post('/comments/:pelicula', auth_1.isAuth, fields_1.commentsValidation, fields_1.checkResult, async (req, res) => {
+router.post('/comments/:pelicula', fields_1.commentsValidation, fields_1.checkResult, async (req, res) => {
     try {
-        console.log(req.session.alias);
-        const pelis = await movie_1.insertComment(req.params.pelicula, req.body, req.session.alias);
+        console.log(req.body.contenido);
+        console.log(req.params.pelicula);
+        const pelis = await movie_1.insertComment(req.params.pelicula, req.body);
         res.json({ status: 200, peliculas: pelis, message: "se encontraro la pelicula" });
     }
     catch (e) {
+        console.log(e);
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener la pelicula' });
     }
 });

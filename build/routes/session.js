@@ -9,7 +9,7 @@ const router = express_1.Router();
 router.get('/', (req, res) => {
     res.send('Aqui estan las cosas de login');
 });
-router.get('/logout', auth_1.isAuth, (req, res) => {
+router.get('/logout', (req, res) => {
     req.logout();
     req.session.alias = null;
     res.json({ status: 200, message: 'Sesión finalizada.' });

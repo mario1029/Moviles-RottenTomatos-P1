@@ -41,12 +41,14 @@ router.get('/comments/:pelicula', async(req,res)=>{
     }
 })
 
-router.post('/comments/:pelicula',isAuth,commentsValidation,checkResult, async(req,res)=>{
+router.post('/comments/:pelicula',commentsValidation,checkResult, async(req,res)=>{
     try{
-        console.log(req.session.alias);
-        const pelis= await insertComment(req.params.pelicula,req.body,req.session.alias);
+        console.log(req.body.contenido);
+        console.log(req.params.pelicula)
+        const pelis= await insertComment(req.params.pelicula,req.body);
         res.json({status: 200, peliculas:pelis,message:"se encontraro la pelicula" })
     }catch(e){
+        console.log(e);
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener la pelicula' });
     }
 })

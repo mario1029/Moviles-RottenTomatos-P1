@@ -36,10 +36,10 @@ export const buscarPeli= async (titulo,parametros): Promise<pelicula[]>=>{
     return peli;
 }
 
-export const detallarPeli= async (titulo:string): Promise<peliculaDetallada>=>{
+export const detallarPeli= async (id:string): Promise<peliculaDetallada>=>{
     const params = new URLSearchParams({
         apiKey:'438924d4',
-        t:titulo
+        i:id
     });
     const url= new URL("http://www.omdbapi.com/");
     url.search=params;

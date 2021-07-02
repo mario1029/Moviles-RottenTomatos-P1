@@ -40,10 +40,10 @@ const buscarPeli = async (titulo, parametros) => {
     return peli;
 };
 exports.buscarPeli = buscarPeli;
-const detallarPeli = async (titulo) => {
+const detallarPeli = async (id) => {
     const params = new URLSearchParams({
         apiKey: '438924d4',
-        t: titulo
+        i: id
     });
     const url = new URL("http://www.omdbapi.com/");
     url.search = params;
