@@ -21,7 +21,7 @@ export class AppComponent {
   }
 
   logged() {
-    if (localStorage.getItem('correo') != '') {
+    if (localStorage.getItem('correo') != '' && localStorage.getItem('correo') !=null) {
       this.isLogged = true;
       this.appPages = [
         { title: 'Home', url: '/home', icon: 'home' },

@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>details</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button dafaultHref='movies'></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf='Pelicula'>
+    <ion-card>
+      <ion-card-header>
+        <ion-img [src]="Pelicula.poster"></ion-img>
+        <ion-card-title class="ion-text-center">{{Pelicula.titulo}}</ion-card-title>
+        <ion-card-subtitle>{{Pelicula.anio}},  {{Pelicula.genero}},   {{Pelicula.duracion}}</ion-card-subtitle>
+        <ion-item *ngIf='Pelicula.rating > 5'>
+          <ion-avatar slot="end">
+            <img [src]="imagen" />
+          </ion-avatar>
+          <ion-label>Rating: {{Pelicula.rating}} </ion-label>
+        </ion-item>
+        <ion-item *ngIf='Pelicula.rating < 5'>
+          <ion-avatar slot="end">
+            <img [src]="imagen2" />
+          </ion-avatar>
+          <ion-label>Rating: {{Pelicula.rating}} </ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle class="ion-text-center">Sinopsis</ion-card-subtitle>
+        <br>
+        {{Pelicula.sinopsis}}
+        <br>        
+        <ion-card-subtitle class="ion-text-center">Detalles Extras</ion-card-subtitle>
+        Director: {{Pelicula.director}}
+      </ion-card-content>
+    </ion-card>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button [routerLink]="['../../lista-comentarios/'+ID]">
+            Ver criticas
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <div *ngIf='correo!=null && correo!=""'>
+            <ion-button [routerLink]="['../../comentario/'+ID]">
+              hacer una critica
+            </ion-button>
+          </div>
+          <div *ngIf='correo==null || correo==""'>
+            <ion-button [routerLink]="['../../comentario/'+ID]" disabled="true">
+              hacer una critica
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>
+

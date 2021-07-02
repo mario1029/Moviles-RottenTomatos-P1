@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>comentario</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button dafaultHref='movies'></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>critica:</ion-label>
+      <ion-input type="text" placeholder="Ingrese su critica aqui" [(ngModel)]="critica" required="true" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>calificacion:</ion-label>
+      <ion-input type="number" placeholder="Califiquelo por favor" [(ngModel)]="calificacion" required="true" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-button (click)="insertComentario()">
+        Enviar comentarios
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

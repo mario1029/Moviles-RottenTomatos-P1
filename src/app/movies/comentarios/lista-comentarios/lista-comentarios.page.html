@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>listaComentarios</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button dafaultHref='movies'></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <div *ngIf='comentarios'>
+      <ion-row *ngFor="let coment of comentarios">
+        <ion-col size="2">
+          <div *ngIf='coment.puntuacion > 5'>
+            <ion-avatar slot="start">
+              <img [src]="imagen" />
+            </ion-avatar>
+            <ion-label>{{coment.puntuacion}}</ion-label>
+          </div>
+          <div *ngIf='coment.puntuacion < 5'>
+            <ion-avatar slot="start">
+              <img [src]="imagen2" />
+            </ion-avatar>
+            <ion-label>{{coment.puntuacion}}</ion-label>
+          </div>
+        </ion-col>
+        <ion-col size="10">
+          <ion-card>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>{{coment.usuario}}</ion-title>
+                <ion-card-subtitle>{{coment.fecha}}</ion-card-subtitle>
+              </ion-toolbar>
+            </ion-header>
+            <ion-card-content>
+              {{coment.contenido}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+</ion-content>
